@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"*.json": "jsonc",
+		"elf/header.h": "c",
+		"xiosbase": "cpp",
+		"stdio.h": "c",
+		"mman.h": "c",
+		"elf.h": "c",
+		"loader.h": "c",
+		"fcntl.h": "c",
+		"stdlib.h": "c"
+	}
+}
