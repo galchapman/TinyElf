@@ -2,11 +2,11 @@ CC=gcc
 LD=ld
 AS=as
 
-out.elf: test-elf
+out.elf: build-elf
 	./$^
 
-test-elf: elf.c
-	$(CC) -o $@ $^ -I../src
+build-elf: elf.c
+	$(CC) -o $@ $^
 
 code: code.o
 	$(LD) $^ -o $@

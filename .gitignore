@@ -2,3 +2,5 @@
 *.elf
 *.o
 *.out
+build-elf
+code
