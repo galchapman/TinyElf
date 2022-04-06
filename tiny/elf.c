@@ -16,14 +16,14 @@ int main(void) {
 	const char text[] = {
 		"Hello World!\n"
 		// write "hello world!\n" to stdout
-		"\x48\xC7\xC0\x01\x00\x00\x00"	// mov rax, 1
-		"\x48\x89\xC7"					// mov rdi, rax
-		"\x48\xC7\xC6\x78\x00\x40\x00"	// mov rsi, message(0x0000000000400078)
-		"\x48\xC7\xC2\x0D\x00\x00\x00"	// mov rdx, 13
+		"\x66\xFF\xC7"  				// inc %di
+		"\x48\x89\xF8"					// movq %rdi, %rax
+		"\x48\xC7\xC6\x78\x00\x40\x00"	// movq $message, %rsi
+		"\x66\xBA\x0D\x00"				// movb $length, %dx
 		"\x0F\x05"						// syscall
 		// exit
-		"\x48\xC7\xC0\x3C\x00\x00\x00"	// mov rax, 60
-		"\x48\xC7\xC7\x00\x00\x00\x00"	// mov rdi, 0
+		"\x66\xB8\x3C\x00"				// $SYSCALL_EXIT, %ax
+		"\x66\x31\xFF"					// xor %di, %di
 		"\x0F\x05"						// syscall
 	};
 
@@ -66,7 +66,7 @@ int main(void) {
 		.e_shstrndx = 0
 	};
 
-	char program[0xb0] = {};
+	char program[sizeof(header)+sizeof(programheaders)+sizeof(text)-1] = {};
 	// write ELF header
 	memcpy(program, &header, sizeof(header));
 	// write program headers
