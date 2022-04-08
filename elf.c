@@ -14,15 +14,15 @@
 int main(void) {
 	
 	const char text[] = {
-		"Hello World!\n"
+		"Hello, World!\n"
 		// write "hello world!\n" to stdout
 		"\x66\xFF\xC7"  				// inc %di
 		"\x48\x89\xF8"					// movq %rdi, %rax
 		"\x48\xC7\xC6\x78\x00\x40\x00"	// movq $message, %rsi
-		"\x66\xBA\x0D\x00"				// movb $length, %dx
+		"\xB2\x0E"						// mov $length, %dl
 		"\x0F\x05"						// syscall
 		// exit
-		"\x66\xB8\x3C\x00"				// $SYSCALL_EXIT, %ax
+		"\xB0\x3C"						// $SYSCALL_EXIT, %ax
 		"\x66\x31\xFF"					// xor %di, %di
 		"\x0F\x05"						// syscall
 	};
@@ -54,7 +54,7 @@ int main(void) {
 		.e_type = ET_EXEC,
 		.e_machine = EM_X86_64,
 		.e_version = EV_CURRENT,
-		.e_entry = 0x400085,
+		.e_entry = 0x400086,
 		.e_phoff = sizeof(Elf64_Ehdr),
 		.e_shoff = 0,
 		.e_flags = 0,
